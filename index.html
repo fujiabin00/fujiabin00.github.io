@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<script src="js/domReady.js"></script>
+<script src="js/move.js"></script>
+<script src="js/block.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jscss.js"></script>
+<script>
+	$(function(){
+		//吸顶
+		var oHeader_bg = document.getElementById('header_bg');
+		var oCopy = document.getElementById('copy');
+		window.onscroll = function(){
+			var scrTop = document.documentElement.scrollTop||document.body.scrollTop;
+			if(oHeader_bg.offsetTop<=scrTop){
+				oHeader_bg.style.position = "fixed";
+				oCopy.style.display = "block";
+			}else{
+				oHeader_bg.style.position = "static";
+				oCopy.style.display = "none";
+			}
+		}
+
+		//布局转换
+		var oLayoutChange = document.getElementById('LayoutChange');
+		var aLi = oLayoutChange.children;
+
+		var zIndex = 2;
+		var aPos = [];
+		for (var i = 0; i < aLi.length; i++) {
+			aPos.push({left:aLi[i].offsetLeft,top:aLi[i].offsetTop});
+			aLi[i].style.left = aPos[i].left+"px";
+			aLi[i].style.top = aPos[i].top+"px";
+		};
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].style.position = "absolute";
+			aLi[i].style.margin = 0;
+		};
+
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].onmouseover=function(){
+				this.style.zIndex=zIndex++;
+				move(this,{width:300,height:260,marginLeft:-(300-270)/2,marginTop:-(260-230)/2});
+			}
+			aLi[i].onmouseout=function(){
+				move(this,{width:270,height:230,marginLeft:0,marginTop:0});
+			}
+		}
+	});
+</script>
+<body>
+	<div id="header_bg" class="header_bg">
+		<div class="wrap">
+			<div class="header">
+				<div class="logo">
+					<a href="javascript:;"><img src="images/logo1.png" alt="logo"></a>
+				</div>
+				<div class="menu">
+					<ul>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="second.html">拖拽</a></li>
+<!-- 						<li><a href="third.html">第三页</a>
+							<ul class="menuList">
+								<li><a href="index.html">page1</a></li>
+								<li><a href="index.html">page1</a></li>
+								<li><a href="index.html">page1</a></li>
+								<li><a href="index.html">page1</a></li>
+							</ul>
+						</li> -->
+						<li><a href="fourth.html">选项卡</a></li>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="index.html">首页</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="copy"></div>
+	<div id="div1"></div>
+
+	<div class="body">
+		<div class="wrap">
+			<ul class="three">
+				<li class="icon1">
+					<img src="images/icon1.png" alt="icon1">
+					<h1>services</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.</p>
+				</li>
+				<li class="icon2">
+					<img src="images/icon2.png" alt="icon2">
+					<h1>services</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.</p>
+				</li>
+				<li class="icon3">
+					<img src="images/icon3.png" alt="icon3">
+					<h1>services</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.</p>
+				</li>
+			</ul>
+		</div>
+		<div class="eight">
+			<div class="wrap">
+				<div class="eight_title">
+					<div class="fl eight_title1">Recent Works</div>
+					<div class="fr eight_title2">BROWSE ALL</div>
+				</div>
+				<ul id="LayoutChange">
+					<li><a href="javascript:;"><img src="images/gallery1.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery2.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery3.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery4.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery5.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery4.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery6.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery2.jpg" width="100%" height="100%" alt=""></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="what">
+			<div class="wrap">
+				<div id="zzsc">
+					<canvas id="canvas" width="920" height="400"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="news">
+			<div class="wrap">
+				<ul id="round">
+					<li><img src="images/gallery1.jpg" /></li>
+					<li><img src="images/gallery2.jpg" /></li>
+					<li><img src="images/gallery3.jpg" /></li>
+					<li><img src="images/gallery4.jpg" /></li>
+					<li><img src="images/gallery5.jpg" /></li>
+					<li><img src="images/gallery6.jpg" /></li>
+					<li><img src="images/gallery1.jpg" /></li>
+					<li><img src="images/gallery2.jpg" /></li>
+					<li><img src="images/gallery3.jpg" /></li>
+					<li><img src="images/gallery4.jpg" /></li>
+					<li><img src="images/gallery5.jpg" /></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 黄条 -->
+		<div class="yellow">This is what everyone wants. its free for limited time Retina!</div>
+	</div>
+	<div class="footer">
+		<div class="wrap">
+			<ul>
+				<li>
+					<h3>RECENT POSTS</h3>
+					<p>
+						This is a sample blog post with an<br />
+						extra super long title<br />
+						This is a sample blog post<br />
+						This is another sample post<br />
+						This is yet anothe sample<br />
+						This is a fifth sample blog post<br />
+					</p>
+				</li>
+				<li>
+					<h3>RECENT POSTS</h3>
+					<p>
+						This is a sample blog post with an<br />
+						extra super long title<br />
+						This is a sample blog post<br />
+						This is another sample post<br />
+						This is yet anothe sample<br />
+						This is a fifth sample blog post<br />
+					</p>
+				</li>
+				<li>
+					<h3>RECENT POSTS</h3>
+					<div>
+						<span>sample</span>
+						<span>tag</span>
+						<span>sample</span>
+						<span>sample</span>
+						<span>tag</span>
+						<span>sample</span>
+						<span>tag</span>
+						<span>sample</span>
+						<span>tag</span>
+					</div>
+				</li>
+				<li>
+					<h3>RECENT POSTS</h3>
+					<p>
+						This is a sample blog post with an<br />
+						extra super long title<br />
+						This is a sample blog post<br />
+						This is another sample post<br />
+						This is yet anothe sample<br />
+						This is a fifth sample blog post<br />
+					</p>
+				</li>
+			</ul>
+			<div class="line"></div>
+			<div class="word">COPYRIGHT © 2014.COMPANY NAME ALL RIGHTS RESERVED. - MORE TEMPLATES
+			</div>
+		</div>	
+	</div>
+</body>
+</html>
+<script>
+	$(function(){
+		document.onmousewheel = function(){
+			if(document.body.scrollTop>2200){
+				var oRound = document.getElementById('round');
+				var aLi = oRound.children;
+				var len = aLi.length;
+
+				var speedX = 0;
+				var speedY = 0;
+				var lastX = 0;
+				var lastY = 0;
+
+
+				var i = len - 1;
+				var timer = setInterval(function(){
+
+					aLi[i].style.transform = "rotateY("+360/len*i+"deg)  translateZ(300px)";
+					i--;
+					if(i < 0){
+						clearInterval(timer);
+					}
+				},300);
+
+
+				var bLeft = bRight = bTop = bBottom = false;
+
+	var x = 150;//上下 rotateX
+	var y = 0;//左右 rotateY
+	
+	oRound.onmousedown = function(ev){ 
+		var disX = ev.clientX - y;
+		var disY = ev.clientY - x;
+		document.onmousemove = function(ev){
+			y = ev.clientX - disX;
+			x = ev.clientY - disY;
+			
+			if(x > 300){// 60
+				x = 300;
+			} else if(x < -300) {// -60
+				x = -300;
+			}
+			
+			oRound.style.transform = "perspective(800px)  rotateX("+-x/10+"deg)  rotateY("+y/10+"deg)";
+			
+			
+			speedX = x - lastX;
+			speedY = y - lastY;
+			lastX = x;
+			lastY = y;
+			
+		};
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			
+			clearInterval(timer);
+			timer = setInterval(function(){
+				
+				x += speedX;
+				y += speedY;
+				
+				speedX *= 0.8;
+				speedY *= 0.8;
+				
+				if(x > 300){// 60
+					x = 300;
+				} else if(x < -300) {// -60
+					x = -300;
+				}
+				
+				//关定时器
+				if(Math.abs(speedX) < 1){
+					speedX = 0;
+				}
+				if(Math.abs(speedY) < 1){
+					speedY = 0;
+				}
+				
+				if(speedX == 0 && speedY == 0){
+					clearInterval(timer);
+					//alert("over");
+				}
+				
+				oRound.style.transform = "perspective(800px)  rotateX("+-x/10+"deg)  rotateY("+y/10+"deg)";
+				
+				
+			},30);
+			
+		};
+		return false;
+	};
+};
+}
+
+
+});
+</script>
