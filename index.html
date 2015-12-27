@@ -9,6 +9,8 @@
 <script src="js/domReady.js"></script>
 <script src="js/move.js"></script>
 <script src="js/block.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jscss.js"></script>
 <script>
 	$(function(){
 		//吸顶
@@ -50,7 +52,6 @@
 				move(this,{width:270,height:230,marginLeft:0,marginTop:0});
 			}
 		}
-
 	});
 </script>
 <body>
@@ -123,11 +124,26 @@
 		</div>
 		<div class="what">
 			<div class="wrap">
-
+				<div id="zzsc">
+					<canvas id="canvas" width="920" height="400"></canvas>
+				</div>
 			</div>
 		</div>
 		<div class="news">
 			<div class="wrap">
+				<ul id="round">
+					<li><img src="images/gallery1.jpg" /></li>
+					<li><img src="images/gallery2.jpg" /></li>
+					<li><img src="images/gallery3.jpg" /></li>
+					<li><img src="images/gallery4.jpg" /></li>
+					<li><img src="images/gallery5.jpg" /></li>
+					<li><img src="images/gallery6.jpg" /></li>
+					<li><img src="images/gallery1.jpg" /></li>
+					<li><img src="images/gallery2.jpg" /></li>
+					<li><img src="images/gallery3.jpg" /></li>
+					<li><img src="images/gallery4.jpg" /></li>
+					<li><img src="images/gallery5.jpg" /></li>
+				</ul>
 			</div>
 		</div>
 
@@ -192,3 +208,101 @@
 	</div>
 </body>
 </html>
+<script>
+	$(function(){
+		document.onmousewheel = function(){
+			if(document.body.scrollTop>2200){
+				var oRound = document.getElementById('round');
+				var aLi = oRound.children;
+				var len = aLi.length;
+
+				var speedX = 0;
+				var speedY = 0;
+				var lastX = 0;
+				var lastY = 0;
+
+
+				var i = len - 1;
+				var timer = setInterval(function(){
+
+					aLi[i].style.transform = "rotateY("+360/len*i+"deg)  translateZ(300px)";
+					i--;
+					if(i < 0){
+						clearInterval(timer);
+					}
+				},300);
+
+
+				var bLeft = bRight = bTop = bBottom = false;
+
+	var x = 150;//上下 rotateX
+	var y = 0;//左右 rotateY
+	
+	oRound.onmousedown = function(ev){ 
+		var disX = ev.clientX - y;
+		var disY = ev.clientY - x;
+		document.onmousemove = function(ev){
+			y = ev.clientX - disX;
+			x = ev.clientY - disY;
+			
+			if(x > 300){// 60
+				x = 300;
+			} else if(x < -300) {// -60
+				x = -300;
+			}
+			
+			oRound.style.transform = "perspective(800px)  rotateX("+-x/10+"deg)  rotateY("+y/10+"deg)";
+			
+			
+			speedX = x - lastX;
+			speedY = y - lastY;
+			lastX = x;
+			lastY = y;
+			
+		};
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			
+			clearInterval(timer);
+			timer = setInterval(function(){
+				
+				x += speedX;
+				y += speedY;
+				
+				speedX *= 0.8;
+				speedY *= 0.8;
+				
+				if(x > 300){// 60
+					x = 300;
+				} else if(x < -300) {// -60
+					x = -300;
+				}
+				
+				//关定时器
+				if(Math.abs(speedX) < 1){
+					speedX = 0;
+				}
+				if(Math.abs(speedY) < 1){
+					speedY = 0;
+				}
+				
+				if(speedX == 0 && speedY == 0){
+					clearInterval(timer);
+					//alert("over");
+				}
+				
+				oRound.style.transform = "perspective(800px)  rotateX("+-x/10+"deg)  rotateY("+y/10+"deg)";
+				
+				
+			},30);
+			
+		};
+		return false;
+	};
+};
+}
+
+
+});
+</script>
