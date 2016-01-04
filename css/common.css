@@ -60,6 +60,7 @@ th,td{border:1px solid #000;}
 .header_bg{width:100%;background:#000;position:static;left:0;top:0;z-index: 9999999999;}
 #copy{height:100px;display:none;}
 .wrap{width:95%;margin:0 auto;}
+.wrap1{width:1280px;margin:0 auto;}
 .header{height:100px;}
 .header .logo{float:left;margin-left:30px;margin-top:30px;}
 .header .menu{float:right;margin-top:30px;}
