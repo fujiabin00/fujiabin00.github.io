@@ -49,7 +49,7 @@
 
 
 .body .yellow{width:100%;height:200px;line-height:200px;background:#FEBD17;color:#fff;text-align: center;font-size: 38px;}
-
+#yellow{background:#FEBD17;}
 
 #div1{ background:url(../images/slider1.jpg); width: 1350px;height:600px;margin: 0 auto;cursor:pointer;}
 #div1 div{float: left; background:url(../images/slider0.jpg);}

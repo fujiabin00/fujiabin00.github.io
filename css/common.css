@@ -63,11 +63,16 @@ th,td{border:1px solid #000;}
 .wrap1{width:1280px;margin:0 auto;}
 .header{height:100px;}
 .header .logo{float:left;margin-left:30px;margin-top:30px;}
-.header .menu{float:right;margin-top:30px;}
+.header .menu{right:0;top:0;float:right;margin-top:30px;}
 .header .menu>ul{}
-.header .menu>ul>li{text-align:center;float:left;height:50px;line-height:50px;font-size:1.5em;position:relative;}
+.header .menu>ul>li{text-align:center;float:left;height:50px;line-height:50px;font-size:1.5em;position:relative;
+
+}
+/*.header .menu>ul>li:hover{transform: perspective(800px) rotateY(360deg) rotateZ(360deg);}*/
 .header .menu>ul>li:hover ul{display:block;}
-.header .menu>ul>li>a{color:#fff;padding:0 28px;display:block;}
+.header .menu>ul>li>a{color:#fff;padding:0 28px;display:block;transition:1s all ease;
+	transform: perspective(800px) rotateY(0deg);}
+.header .menu>ul>li>a:hover{transform: perspective(800px) rotateY(360deg);color:#DC254E;font-family:"kaiti";font-size: 20px;}
 .header .menu>ul>li>ul{display:none;position:absolute;left:-40px;width:180px;z-index:2;}
 .header .menu>ul>li>ul>li{height:40px;line-height:40px;width:100%;border-bottom:1px solid #ccc;background:#000;}
 .header .menu>ul>li>ul>li>a{color:#fff;display:block;}
