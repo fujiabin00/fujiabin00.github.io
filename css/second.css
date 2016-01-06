@@ -1,6 +1,6 @@
 .body{overflow: hidden;width:100%;text-align: center;}
 .body #drag{width:100%;padding:50px 10px;position:relative;height:1000px;}
-.body #drag .three{width:33.3%;text-align: center;float:left;}
+.body #drag .three{width:33.3%;height:500px;text-align: center;float:left;}
 .body #drag .three h3{margin-top:0.8em;margin-bottom:0.4em;font-size: 3em;line-height:1.8em;}
 .body #drag .three p{width:80%;line-height: 1.8em;font-size:1.2em;margin:0 auto;margin-bottom:50px;}
 
