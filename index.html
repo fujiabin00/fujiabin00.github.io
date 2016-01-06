@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>首页</title>
+	<title>欢迎登陆傅佳彬个人网站^_^!</title>
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/index.css">
+	<link href="favicon.ico" rel="icon" type="image/x-icon" />
 </head>
 <script src="js/domReady.js"></script>
 <script src="js/move.js"></script>
@@ -13,6 +14,14 @@
 <script type="text/javascript" src="js/jscss.js"></script>
 <script>
 	$(function(){
+		//标题滚动
+		function scroll() { 
+			var titleInfo = document.title;  
+			var firstInfo = titleInfo.charAt(0); 
+			var lastInfo = titleInfo.substring(1, titleInfo.length); 
+			document.title = lastInfo + firstInfo; 
+		} 
+		setInterval(scroll, 500); 
 		//吸顶
 		var oHeader_bg = document.getElementById('header_bg');
 		var oCopy = document.getElementById('copy');
