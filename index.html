@@ -53,10 +53,16 @@
 		};
 
 		for(var i=0;i<aLi.length;i++){
-			aLi[i].onmouseover=function(){
-				this.style.zIndex=zIndex++;
-				move(this,{width:300,height:260,marginLeft:-(300-270)/2,marginTop:-(260-230)/2});
-			}
+			(function(index){
+				aLi[i].onmouseover=function(){
+					aLi[index].style.zIndex=zIndex++;
+					move(aLi[index],{width:300,height:260,marginLeft:-(300-270)/2,marginTop:-(260-230)/2});
+					var oA = new Audio();
+					oA.src = "mp3/"+(index+1)+".mp3";
+					oA.play();
+				}
+			})(i);
+			
 			aLi[i].onmouseout=function(){
 				move(this,{width:270,height:230,marginLeft:0,marginTop:0});
 			}
@@ -72,7 +78,7 @@
 					<a href="javascript:;"><img src="images/logo1.png" alt="logo"></a>
 				</div>
 				<div class="menu">
-					<ul>
+					<ul id="menu">
 						<li><a href="index.html">首页</a></li>
 						<li><a href="second.html">拖拽</a></li>
 <!-- 						<li><a href="third.html">第三页</a>
@@ -159,7 +165,10 @@
 		</div>
 
 		<!-- 黄条 -->
-		<div class="yellow">This is what everyone wants. its free for limited time Retina!</div>
+		<div class="yellow" >
+			<canvas id="yellow"></canvas>
+			<!-- This is what everyone wants. its free for limited time Retina! -->
+		</div>
 	</div>
 	<div class="footer">
 		<div class="wrap">
@@ -246,44 +255,44 @@
 
 				var bLeft = bRight = bTop = bBottom = false;
 
-	var x = 150;//上下 rotateX
-	var y = 0;//左右 rotateY
-	
-	oRound.onmousedown = function(ev){ 
-		var disX = ev.clientX - y;
-		var disY = ev.clientY - x;
-		document.onmousemove = function(ev){
-			y = ev.clientX - disX;
-			x = ev.clientY - disY;
-			
-			if(x > 300){// 60
-				x = 300;
-			} else if(x < -300) {// -60
-				x = -300;
-			}
-			
-			oRound.style.transform = "perspective(800px)  rotateX("+-x/10+"deg)  rotateY("+y/10+"deg)";
-			
-			
-			speedX = x - lastX;
-			speedY = y - lastY;
-			lastX = x;
-			lastY = y;
-			
-		};
-		document.onmouseup = function(){
-			document.onmousemove = null;
-			document.onmouseup = null;
-			
-			clearInterval(timer);
-			timer = setInterval(function(){
+				var x = 150;//上下 rotateX
+				var y = 0;//左右 rotateY
+
+				oRound.onmousedown = function(ev){ 
+					var disX = ev.clientX - y;
+					var disY = ev.clientY - x;
+					document.onmousemove = function(ev){
+						y = ev.clientX - disX;
+						x = ev.clientY - disY;
+
+				if(x > 300){// 60
+					x = 300;
+				} else if(x < -300) {// -60
+					x = -300;
+				}
 				
-				x += speedX;
-				y += speedY;
+				oRound.style.transform = "perspective(800px)  rotateX("+-x/10+"deg)  rotateY("+y/10+"deg)";
 				
-				speedX *= 0.8;
-				speedY *= 0.8;
 				
+				speedX = x - lastX;
+				speedY = y - lastY;
+				lastX = x;
+				lastY = y;
+				
+			};
+			document.onmouseup = function(){
+				document.onmousemove = null;
+				document.onmouseup = null;
+
+				clearInterval(timer);
+				timer = setInterval(function(){
+
+					x += speedX;
+					y += speedY;
+
+					speedX *= 0.8;
+					speedY *= 0.8;
+
 				if(x > 300){// 60
 					x = 300;
 				} else if(x < -300) {// -60
@@ -307,13 +316,129 @@
 				
 				
 			},30);
-			
+
+			};
+			return false;
 		};
-		return false;
 	};
-};
+}
+
+//屏保
+var oC = document.getElementById("yellow");
+var gd = oC.getContext("2d"); 
+
+oC.width = oC.parentNode.offsetWidth;
+oC.height = oC.parentNode.offsetHeight;
+
+var aPoint = [];//存点
+var N = 3;
+
+	//点 属性  大小  位置  速度
+	//{w,h,x,y,speedX,speedY}
+	for(var i = 0; i < N; i++){
+		aPoint[i] = {
+			w:1,
+			h:1,
+			x:rnd(0,oC.width),
+			y:rnd(0,oC.height),
+			speedX:rnd(-5,5),
+			speedY:rnd(-5,5)
+		};
+	}
+	
+	var oldPoint = [];// [[5],[5]，[5]。。。。]
+	setInterval(function(){
+		gd.clearRect(0,0,oC.width,oC.height);
+		//绘制点
+		for(var i = 0; i < N; i++){
+			drawPoint(aPoint[i]);
+			
+			//动 改变x,y
+			aPoint[i].x += aPoint[i].speedX;
+			aPoint[i].y += aPoint[i].speedY;
+			
+			if(aPoint[i].x < 0){
+				aPoint[i].x = 0;
+				aPoint[i].speedX *= -1;
+			}
+			
+			if(aPoint[i].x > oC.width){
+				aPoint[i].x = oC.width;
+				aPoint[i].speedX *= -1;
+			}
+			if(aPoint[i].y < 0){
+				aPoint[i].y = 0;
+				aPoint[i].speedY *= -1;
+			}
+			
+			if(aPoint[i].y > oC.height){
+				aPoint[i].y = oC.height;
+				aPoint[i].speedY *= -1;
+			}
+		}
+		
+		//连接点
+		gd.beginPath();
+		gd.moveTo(aPoint[0].x,aPoint[0].y);
+		
+		for(var i = 1; i < N; i++){
+			gd.lineTo(aPoint[i].x,aPoint[i].y);
+		}
+		gd.closePath();
+		gd.strokeStyle = "#fff";
+		gd.stroke();
+		
+		
+		
+		//影子 
+		var arr = [];
+		for(var i = 0; i < N; i++){
+			arr.push({x:aPoint[i].x,y:aPoint[i].y});
+		}
+		
+		oldPoint.push(arr);
+		
+		while(oldPoint.length > 10){
+			oldPoint.shift();
+		}
+		
+		//绘制影子 
+		for(var i = 0; i < oldPoint.length; i++){
+			
+			gd.beginPath();
+			gd.moveTo(oldPoint[i][0].x,oldPoint[i][0].y);
+			for(var j = 0; j < N; j++){
+				gd.lineTo(oldPoint[i][j].x,oldPoint[i][j].y);
+			}
+			gd.closePath();
+			
+			var opacity = i/oldPoint.length;
+			gd.strokeStyle = "rgba(255,255,255,"+opacity+")";
+			gd.stroke();
+		}
+		
+	},16);
+
+function drawPoint(p){
+	//文字阴影
+	gd.shadowOffsetX = 10;
+	gd.shadowOffsetY = 10;
+	gd.shadowBlur = 3;
+	gd.shadowColor = "#fff";
+
+	gd.font = "50px kaiti";
+	gd.strokeText("Hello World! Hello Canvas!",300,100);
+
+	gd.fillStyle = "#fff";
+	gd.fillRect(p.x,p.y,p.w,p.h);
+	gd.strokeRect(p.x,p.y,p.w,p.h);
 }
 
 
+
 });
+
+function rnd(n,m){
+	return Math.floor(Math.random()*(m - n) + n);
+}
 </script>
