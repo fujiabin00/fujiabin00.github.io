@@ -1,1 +1,1 @@
-FROM fujiabin00/meteord
+FROM fujiabin00/meteord:onbuild
