@@ -1,1 +1,1 @@
-FROM fujiabin00/meteord:onbulid
+FROM fujiabin00/dmeteor
