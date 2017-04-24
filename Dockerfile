@@ -1,1 +1,0 @@
-FROM fujiabin00/dmeteor
