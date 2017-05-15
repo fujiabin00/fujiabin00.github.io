@@ -12,98 +12,8 @@
 <script src="js/block.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/jscss.js"></script>
-<script src="js/browser.js"></script>
-<script src="js/react.js"></script>
-<script src="js/react-dom.js"></script>
-
-<script type='text/babel'>
-	class Header extends React.Component{
-		constructor(...args){
-			super(...args);
-		}
-
-		render(){
-			return 	<div className="wrap">
-					<div className="header">
-						<div className="logo">
-							<a href="javascript:;"><img src="images/logo1.png" alt="logo"/></a>
-						</div>
-						<div className="menu">
-							<ul id="menu">
-								<li><a href="index.html">首页</a></li>
-								<li><a href="second.html">拖拽</a></li>
-								<li><a href="fourth.html">选项卡</a></li>
-								<li><a href="index.html">首页</a></li>
-								<li><a href="index.html">首页</a></li>
-								<li className="box"></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-		}
-	}
-
-	class Services extends React.Component{
-		constructor(...args){
-			super(...args);
-
-			this.aImgPath = ['images/icon1.png','images/icon2.png','images/icon3.png'];
-		}
-
-		render(){
-			var arr = [];
-
-			for (var i = 0; i < this.aImgPath.length; i++) {
-				arr.push(<li key={i} className="icon1">
-					<img src={this.aImgPath[i]} alt={'icon'+(i+1)}/>
-					<h1>services</h1>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.</p>
-				</li>);
-			};
-
-			return 	<ul className="three">
-				{arr}
-			</ul>
-		}
-	}
-
-	class LayoutChange extends React.Component{
-		constructor(...args){
-			super(...args);
-		}
-
-		render(){
-			var arr = [];
-
-			for (var i = 0; i < 8; i++) {
-				arr.push(<li key={i}><a href="javascript:;"><img src={'images/gallery'+(i+1)+'.jpg'} width="100%" height="100%" alt=""/></a></li>);
-			};
-
-			return 	<ul id="LayoutChange">
-					{arr}
-				</ul>
-		}
-	}
-
-
-
+<script>
 	$(function(){
-		ReactDOM.render(
-			<Header/>,
-			$('#header_bg')[0]
-		);
-
-		ReactDOM.render(
-			<Services/>,
-			$('#services')[0]
-		);
-
-		ReactDOM.render(
-			<LayoutChange/>,
-			$('#wrap1')[0]
-		);
-
-
 		//标题滚动
 		function scroll() { 
 			var titleInfo = document.title;  
@@ -113,18 +23,18 @@
 		} 
 		setInterval(scroll, 500); 
 		//吸顶
-		// var oHeader_bg = document.getElementById('header_bg');
-		// var oCopy = document.getElementById('copy');
-		// window.onscroll = function(){
-		// 	var scrTop = document.documentElement.scrollTop||document.body.scrollTop;
-		// 	if(oHeader_bg.offsetTop<=scrTop){
-		// 		oHeader_bg.style.position = "fixed";
-		// 		oCopy.style.display = "block";
-		// 	}else{
-		// 		oHeader_bg.style.position = "static";
-		// 		oCopy.style.display = "none";
-		// 	}
-		// }
+		var oHeader_bg = document.getElementById('header_bg');
+		var oCopy = document.getElementById('copy');
+		window.onscroll = function(){
+			var scrTop = document.documentElement.scrollTop||document.body.scrollTop;
+			if(oHeader_bg.offsetTop<=scrTop){
+				oHeader_bg.style.position = "fixed";
+				oCopy.style.display = "block";
+			}else{
+				oHeader_bg.style.position = "static";
+				oCopy.style.display = "none";
+			}
+		}
 
 		//布局转换
 		var oLayoutChange = document.getElementById('LayoutChange');
@@ -162,21 +72,71 @@
 </script>
 <body>
 	<div id="header_bg" class="header_bg">
+		<div class="wrap">
+			<div class="header">
+				<div class="logo">
+					<a href="javascript:;"><img src="images/logo1.png" alt="logo"></a>
+				</div>
+				<div class="menu">
+					<ul id="menu">
+						<li><a href="index.html">首页</a></li>
+						<li><a href="second.html">拖拽</a></li>
+<!-- 						<li><a href="third.html">第三页</a>
+							<ul class="menuList">
+								<li><a href="index.html">page1</a></li>
+								<li><a href="index.html">page1</a></li>
+								<li><a href="index.html">page1</a></li>
+								<li><a href="index.html">page1</a></li>
+							</ul>
+						</li> -->
+						<li><a href="fourth.html">选项卡</a></li>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="index.html">首页</a></li>
+						<li class="box"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
-
+	<div id="copy"></div>
 	<div id="div1"></div>
 
 	<div class="body">
-		<div class="wrap" id='services'>
-			
+		<div class="wrap">
+			<ul class="three">
+				<li class="icon1">
+					<img src="images/icon1.png" alt="icon1">
+					<h1>services</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.</p>
+				</li>
+				<li class="icon2">
+					<img src="images/icon2.png" alt="icon2">
+					<h1>services</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.</p>
+				</li>
+				<li class="icon3">
+					<img src="images/icon3.png" alt="icon3">
+					<h1>services</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur.</p>
+				</li>
+			</ul>
 		</div>
-
 		<div class="eight">
-			<div class="wrap1" id='wrap1'>
+			<div class="wrap1">
 				<div class="eight_title">
 					<div class="fl eight_title1">Recent Works</div>
 					<div class="fr eight_title2">BROWSE ALL</div>
 				</div>
+				<ul id="LayoutChange">
+					<li><a href="javascript:;"><img src="images/gallery1.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery2.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery3.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery4.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery5.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery4.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery6.jpg" width="100%" height="100%" alt=""></a></li>
+					<li><a href="javascript:;"><img src="images/gallery2.jpg" width="100%" height="100%" alt=""></a></li>
+				</ul>
 			</div>
 		</div>
 		<div class="what">
